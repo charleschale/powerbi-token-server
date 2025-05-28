@@ -1,6 +1,6 @@
 import { defineCustomElement } from '@wix/custom-elements';
 
-defineCustomElement('PowerBIEmbed', () => {
+defineCustomElement('powerbi-embed', () => {
   const container = document.createElement('div');
   container.id = 'reportContainer';
   container.style.width = '100%';
