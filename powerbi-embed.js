@@ -1,8 +1,7 @@
-import { defineCustomElement } from '@wix/custom-elements';
-
 defineCustomElement('powerbi-embed', () => {
   const container = document.createElement('div');
   container.id = 'reportContainer';
+  container.innerText = 'Loading Power BI...';
   container.style.width = '100%';
   container.style.height = '100%';
 
@@ -24,8 +23,18 @@ defineCustomElement('powerbi-embed', () => {
             navContentPaneEnabled: true
           }
         };
+        container.innerText = ''; // Clear loading text
         window.powerbi.embed(container, config);
+      })
+      .catch(err => {
+        container.innerText = 'Failed to load Power BI report.';
+        console.error('Power BI embed error:', err);
       });
+  };
+
+  sdkScript.onerror = () => {
+    container.innerText = 'Failed to load Power BI SDK.';
+    console.error('Power BI SDK load error.');
   };
 
   container.appendChild(sdkScript);
