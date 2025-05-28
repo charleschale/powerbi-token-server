@@ -1,12 +1,14 @@
 from flask import Flask, jsonify
 import msal
 import requests
+import os
 
 app = Flask(__name__)
 
+# Config values
 TENANT_ID = "3be3af3c-46a1-461d-93b1-44954da5e032"
 CLIENT_ID = "191260ff-ab3f-4d75-a211-780754200954"
-CLIENT_SECRET = "YOUR_CLIENT_SECRET_HERE"
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")  # <-- pulls from Render environment
 REPORT_ID = "a6479e28-0ed5-4515-90ec-af205f635699"
 GROUP_ID = "5c32a84f-0b3d-406c-9097-4930093e3005"
 DATASET_ID = "340c9e95-0459-4b8b-9e36-9c968643d777"
