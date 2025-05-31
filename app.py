@@ -24,8 +24,10 @@ def get_embed_token():
     token_response = app_msal.acquire_token_for_client(scopes=scope)
     access_token = token_response.get("access_token")
 
-    if not access_token:
-        return jsonify({"error": "Unable to authenticate with Azure AD"}), 401
+if not access_token:
+    print("MSAL token response:", token_response)  # log real error
+    return jsonify({"error": "Unable to authenticate with Azure AD"}), 401
+
 
     embed_url = f"https://api.powerbi.com/v1.0/myorg/groups/{GROUP_ID}/reports/{REPORT_ID}/GenerateToken"
     headers = {
