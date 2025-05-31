@@ -1,9 +1,11 @@
 from flask import Flask, jsonify
+from flask_cors import CORS  # ✅ Add this line
 import msal
 import requests
 import os
 
 app = Flask(__name__)
+CORS(app, origins=["https://work.hale.global"])  # ✅ Allow your WordPress domain
 
 # Configuration
 TENANT_ID = "3be3af3c-46a1-461d-93b1-44954da5e032"
