@@ -40,5 +40,4 @@ window.addEventListener('DOMContentLoaded', () => {
   };
 
   document.body.appendChild(sdkScript);
-});
-
+});  
