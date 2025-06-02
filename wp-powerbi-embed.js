@@ -9,6 +9,8 @@ window.addEventListener('DOMContentLoaded', () => {
   const groupId = container.dataset.groupId;
   const datasetId = container.dataset.datasetId;
 
+  console.log("Embed Params:", { reportId, groupId, datasetId }); // ✅ Log this!
+
   if (!reportId || !groupId || !datasetId) {
     container.innerText = "Missing embed configuration data.";
     console.error("Missing data attributes for report.");
@@ -19,7 +21,10 @@ window.addEventListener('DOMContentLoaded', () => {
   sdkScript.src = 'https://cdn.jsdelivr.net/npm/powerbi-client@2.21.0/dist/powerbi.min.js';
 
   sdkScript.onload = () => {
-    fetch(`https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${reportId}&groupId=${groupId}&datasetId=${datasetId}`)
+    const url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${reportId}&groupId=${groupId}&datasetId=${datasetId}`;
+    console.log("Fetching:", url); // ✅ Log full fetch URL
+
+    fetch(url)
       .then(res => res.json())
       .then(data => {
         if (!data.token || !data.embedUrl) {
