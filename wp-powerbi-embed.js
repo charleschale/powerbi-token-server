@@ -5,11 +5,21 @@ window.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  const reportId = container.dataset.reportId;
+  const groupId = container.dataset.groupId;
+  const datasetId = container.dataset.datasetId;
+
+  if (!reportId || !groupId || !datasetId) {
+    container.innerText = "Missing embed configuration data.";
+    console.error("Missing data attributes for report.");
+    return;
+  }
+
   const sdkScript = document.createElement('script');
   sdkScript.src = 'https://cdn.jsdelivr.net/npm/powerbi-client@2.21.0/dist/powerbi.min.js';
 
   sdkScript.onload = () => {
-    fetch("https://powerbi-token-server.onrender.com/getEmbedToken")
+    fetch(`https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${reportId}&groupId=${groupId}&datasetId=${datasetId}`)
       .then(res => res.json())
       .then(data => {
         if (!data.token || !data.embedUrl) {
@@ -31,7 +41,7 @@ window.addEventListener('DOMContentLoaded', () => {
           }
         };
 
-        container.innerHTML = ''; // Clear "Loading..." message
+        container.innerHTML = '';
         window.powerbi.embed(container, config);
       })
       .catch(err => {
