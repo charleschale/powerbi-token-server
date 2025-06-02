@@ -5,9 +5,10 @@ window.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  const reportId = container.dataset.reportId;
-  const groupId = container.dataset.groupId;
-  const datasetId = container.dataset.datasetId;
+  const reportId = container.dataset.reportId || "a6479e28-0ed5-4515-90ec-af205f635699";
+const groupId = container.dataset.groupId || "5c32a84f-0b3d-406c-9097-4930093e3005";
+const datasetId = container.dataset.datasetId || "340c9e95-0459-4b8b-9e36-9c968643d777";
+
 
   console.log("Embed Params:", { reportId, groupId, datasetId }); // ✅ Log this!
 
@@ -22,29 +23,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
   sdkScript.onload = () => {
     const url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${reportId}&groupId=${groupId}&datasetId=${datasetId}`;
-    console.log("Fetching:", url); // ✅ Log full fetch URL
+    console.log("Constructed fetch URL:", url);
 
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        if (!data.token || !data.embedUrl) {
-          container.innerText = "Failed to load embed config.";
-          console.error("Embed token response invalid:", data);
-          return;
-        }
-
-        const models = window['powerbi-client'].models;
-        const config = {
-          type: 'report',
-          id: data.reportId,
-          embedUrl: data.embedUrl,
-          accessToken: data.token,
-          tokenType: models.TokenType.Embed,
-          settings: {
-            filterPaneEnabled: true,
-            navContentPaneEnabled: true
-          }
-        };
+fetch(url)
+  .then(res => res.json())
+  .then(data => {
+    console.log("Response from server:", data);  // 👈 log full response
+    if (!data.token || !data.embedUrl) {
+      container.innerText = "Failed to load embed config.";
+      console.error("Embed token response invalid:", data);
+      return;
+    }
+    
+    ;
 
         container.innerHTML = '';
         window.powerbi.embed(container, config);
