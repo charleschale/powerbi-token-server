@@ -1,4 +1,4 @@
-Flask
-flask-cors
-msal
-requests
+Flask==2.2.5
+flask-cors==3.0.10
+msal==1.25.0
+requests==2.31.0
