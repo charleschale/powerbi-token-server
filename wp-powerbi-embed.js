@@ -34,6 +34,8 @@ window.addEventListener('DOMContentLoaded', () => {
         }
 
         const models = window['powerbi-client'].models;
+        const isMobile = window.innerWidth < 768;
+
         const config = {
           type: 'report',
           id: data.reportId,
@@ -41,12 +43,10 @@ window.addEventListener('DOMContentLoaded', () => {
           accessToken: data.token,
           tokenType: models.TokenType.Embed,
           settings: {
-            layoutType: models.LayoutType.Custom, // optional: force custom layout
+            layoutType: isMobile ? models.LayoutType.Master : models.LayoutType.Custom,
             navContentPaneEnabled: true,
             panes: {
-              navigationPane: {
-                visible: true
-              }
+              navigationPane: { visible: true }
             }
           }
         };
