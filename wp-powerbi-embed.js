@@ -42,10 +42,16 @@ window.addEventListener('DOMContentLoaded', () => {
           tokenType: models.TokenType.Embed,
           settings: {
             filterPaneEnabled: true,
-            navContentPaneEnabled: true
-            layoutType: models.LayoutType.Custom // 👈 this is the key fix
-          }
-        };
+            navContentPaneEnabled: true,
+            layoutType: models.LayoutType.Custom,   // forces Power BI to render side nav
+            panes: {
+              navigationPane: {
+                visible: true   // 👈 show page tabs on the left
+            }
+    }
+  }
+};
+
 
         container.innerHTML = '';
         window.powerbi.embed(container, config);
