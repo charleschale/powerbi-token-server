@@ -35,21 +35,19 @@ window.addEventListener('DOMContentLoaded', () => {
 
         const models = window['powerbi-client'].models;
         const config = {
-          type: 'report',
-          id: data.reportId,
-          embedUrl: data.embedUrl,
-          accessToken: data.token,
-          tokenType: models.TokenType.Embed,
-          settings: {
-            layoutType: models.LayoutType.Custom, // optional: force custom layout
-            navContentPaneEnabled: true,
-            panes: {
-              navigationPane: {
-                visible: true
-              }
-            }
-          }
-        };
+  type: "report",
+  id: configData.reportId,
+  embedUrl: data.embedUrl,
+  accessToken: data.token,
+  tokenType: models.TokenType.Embed,
+  settings: {
+    layoutType: models.LayoutType.Master,  // 👈 this shows tabs
+    panes: {
+      navigationPane: { visible: true }
+    }
+  }
+};
+
 
         container.innerHTML = '';
         window.powerbi.embed(container, config);
