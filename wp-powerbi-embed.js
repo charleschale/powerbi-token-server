@@ -43,6 +43,7 @@ window.addEventListener('DOMContentLoaded', () => {
           settings: {
             filterPaneEnabled: true,
             navContentPaneEnabled: true
+            layoutType: models.LayoutType.Custom // 👈 this is the key fix
           }
         };
 
