@@ -41,16 +41,15 @@ window.addEventListener('DOMContentLoaded', () => {
           accessToken: data.token,
           tokenType: models.TokenType.Embed,
           settings: {
+            layoutType: models.LayoutType.Custom, // optional: force custom layout
+            navContentPaneEnabled: true,
             panes: {
               navigationPane: {
                 visible: true
               }
             }
           }
-    }
-  }
-};
-
+        };
 
         container.innerHTML = '';
         window.powerbi.embed(container, config);
