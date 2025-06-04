@@ -1,16 +1,3 @@
-from flask import Flask, jsonify, request
-from flask_cors import CORS
-import msal
-import requests
-import os
-
-app = Flask(__name__)
-CORS(app, origins=["https://work.hale.global"])
-
-TENANT_ID = "3be3af3c-46a1-461d-93b1-44954da5e032"
-CLIENT_ID = "191260ff-ab3f-4d75-a211-780754200954"
-CLIENT_SECRET = os.getenv("CLIENT_SECRET")
-
 @app.route("/getEmbedToken", methods=["GET"])
 def get_embed_token():
     report_id = request.args.get("reportId")
@@ -26,12 +13,21 @@ def get_embed_token():
     app_msal = msal.ConfidentialClientApplication(
         CLIENT_ID, authority=authority_url, client_credential=CLIENT_SECRET
     )
+
+    # Request Azure AD token (add error handling here)
     token_response = app_msal.acquire_token_for_client(scopes=scope)
-    access_token = token_response.get("access_token")
 
-    if not access_token:
-        return jsonify({"error": "Unable to authenticate with Azure AD", "details": token_response}), 401
+    if "access_token" not in token_response:
+        return jsonify({
+            "error": "MSAL failed to acquire token",
+            "error_description": token_response.get("error_description"),
+            "correlation_id": token_response.get("correlation_id"),
+            "raw": token_response
+        }), 500
 
+    access_token = token_response["access_token"]
+
+    # Generate Power BI embed token
     embed_url = f"https://api.powerbi.com/v1.0/myorg/groups/{group_id}/reports/{report_id}/GenerateToken"
     headers = {
         "Content-Type": "application/json",
@@ -58,6 +54,3 @@ def get_embed_token():
         "embedUrl": embed_iframe_url,
         "reportId": report_id
     })
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=5000)
