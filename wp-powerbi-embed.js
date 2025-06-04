@@ -41,13 +41,12 @@ window.addEventListener('DOMContentLoaded', () => {
           accessToken: data.token,
           tokenType: models.TokenType.Embed,
           settings: {
-            filterPaneEnabled: true,
-            navContentPaneEnabled: true,
-            layoutType: models.LayoutType.Custom,   // forces Power BI to render side nav
             panes: {
               navigationPane: {
-                visible: true   // 👈 show page tabs on the left
+                visible: true
+              }
             }
+          }
     }
   }
 };
