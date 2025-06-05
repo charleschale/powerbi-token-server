@@ -59,7 +59,11 @@ window.addEventListener('DOMContentLoaded', () => {
             layoutType: isMobile ? models.LayoutType.Master : models.LayoutType.Custom,
             navContentPaneEnabled: true,
             panes: {
-              navigationPane: { visible: true }
+              navigationPane: { visible: true },
+              pageNavigation: {
+                visible: true,
+                position: models.PageNavigationPosition.Bottom
+              }
             }
           }
         };
