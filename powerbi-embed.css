@@ -1,0 +1,55 @@
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  header, .site-header {
+    z-index: 1100;
+  }
+
+  #reportWrapper,
+  #reportContainer,
+  #reportContainer iframe {
+    position: fixed;
+    top: 95px;
+    left: 0;
+    width: 100vw !important;
+    min-width: 1024px !important;
+    height: calc(100vh - 95px) !important;
+    max-height: calc(100vh - 95px) !important;
+    max-width: 100vw !important;
+    margin: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    z-index: 1000;
+  }
+
+  @media (max-width: 767px) {
+    #reportWrapper,
+    #reportContainer,
+    #reportContainer iframe {
+      min-width: 100vw !important;
+      overflow: auto !important;
+    }
+    #reportContainer,
+    #reportContainer iframe {
+      height: calc(100dvh - 95px) !important;
+      overflow-y: auto !important;
+    }
+  }
+
+  footer, .site-footer {
+    display: none !important;
+  }
+
+  body.admin-bar #reportWrapper,
+  body.admin-bar #reportContainer,
+  body.admin-bar #reportContainer iframe {
+    top: 132px;
+    height: calc(100vh - 132px) !important;
+    max-height: calc(100vh - 132px) !important;
+  }

@@ -5,18 +5,17 @@ window.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
-  // Inject minimal styles for embedding
-  const styleTag = document.createElement('style');
-  styleTag.textContent = `
-    footer, .site-footer { display: none !important; }
-    @media (max-width: 767px) {
-      #reportContainer {
-        position: relative;
-        width: 100%;
-      }
-    }
-  `;
-  document.head.appendChild(styleTag);
+  // Ensure embed stylesheet is present
+  const cssId = 'powerbi-embed-styles';
+  if (!document.getElementById(cssId)) {
+    const link = document.createElement('link');
+    link.id = cssId;
+    link.rel = 'stylesheet';
+    const currentScript = document.currentScript;
+    const base = currentScript ? currentScript.src.split('/').slice(0, -1).join('/') + '/' : '';
+    link.href = base + 'powerbi-embed.css';
+    document.head.appendChild(link);
+  }
 
   const configData = window.PowerBIEmbedConfig || {
     reportId: container.dataset.reportId,
