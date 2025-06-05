@@ -48,9 +48,10 @@ The server will listen on port `5000` by default. The embed token endpoint will 
 
 ## Embedding in WordPress
 
-Include `wp-powerbi-embed.js` on your WordPress page and provide the report information using attributes (or by defining `window.PowerBIEmbedConfig` before the script loads):
+Include `powerbi-embed.css` and `wp-powerbi-embed.js` on your WordPress page and provide the report information using attributes (or by defining `window.PowerBIEmbedConfig` before the script loads):
 
 ```html
+<link rel="stylesheet" href="/path/to/powerbi-embed.css">
 <div id="reportContainer"
      data-report-id="<report-id>"
      data-group-id="<workspace-id>"
