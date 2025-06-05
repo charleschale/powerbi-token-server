@@ -8,9 +8,13 @@ This Flask application returns an embed token for a Power BI report so it can be
 * The packages listed in `requirements.txt`
 
 It is recommended to create a virtual environment before installing dependencies.
+Make sure to specify the Python version when creating the environment:
 
 ```bash
-python -m venv venv
+# Windows
+py -3.10 -m venv venv
+# macOS/Linux
+python3.10 -m venv venv
 source venv/bin/activate
 pip install -r requirements.txt
 ```
