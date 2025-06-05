@@ -15,6 +15,15 @@ source venv/bin/activate
 pip install -r requirements.txt
 ```
 
+On Windows PowerShell, running `\.venv\Scripts\Activate.ps1` may be blocked by the execution policy. Temporarily bypass it with:
+
+```powershell
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process
+.\venv\Scripts\Activate.ps1
+```
+
+Use `venv\Scripts\activate.bat` for the Command Prompt.
+
 ## Configuration
 
 Update `TENANT_ID`, `CLIENT_ID` and the allowed CORS domain at the top of `app.py` if needed. The application expects a `CLIENT_SECRET` environment variable. Set it in your shell before starting the app:
