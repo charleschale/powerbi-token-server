@@ -5,6 +5,19 @@ window.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  // Inject minimal styles for embedding
+  const styleTag = document.createElement('style');
+  styleTag.textContent = `
+    footer, .site-footer { display: none !important; }
+    @media (max-width: 767px) {
+      #reportContainer {
+        position: relative;
+        width: 100%;
+      }
+    }
+  `;
+  document.head.appendChild(styleTag);
+
   const configData = window.PowerBIEmbedConfig || {};
   const { reportId, groupId, datasetId } = configData;
 
