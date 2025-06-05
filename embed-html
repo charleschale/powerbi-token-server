@@ -57,14 +57,11 @@
   }
 </style>
 
-<!-- 1. Declare config up front -->
-<script>
-  window.PowerBIEmbedConfig = {
-    reportId: "a6479e28-0ed5-4515-90ec-af205f635699",
-    groupId: "5c32a84f-0b3d-406c-9097-4930093e3005",
-    datasetId: "340c9e95-0459-4b8b-9e36-9c968643d777"
-  };
-</script>
+<!-- 1. Load configuration -->
+<!--
+  Include a script that defines `window.PowerBIEmbedConfig` before this file
+  is loaded. See `wp-powerbi-config.js` for an example configuration.
+-->
 
 <!-- 2. Embed container -->
 <div id="reportWrapper">

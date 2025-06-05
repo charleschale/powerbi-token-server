@@ -35,18 +35,17 @@ The server will listen on port `5000` by default. The embed token endpoint will 
 
 ## Embedding in WordPress
 
-Include `wp-powerbi-embed.js` on your WordPress page and define the Power BI configuration before loading the script:
+Include `wp-powerbi-embed.js` on your WordPress page. Define the Power BI
+configuration in a separate script before loading the embed snippet:
 
 ```html
+<script src="/path/to/wp-powerbi-config.js"></script>
 <div id="reportContainer" style="height:600px;"></div>
-<script>
-  window.PowerBIEmbedConfig = {
-    reportId: "<report-id>",
-    groupId: "<workspace-id>",
-    datasetId: "<dataset-id>"
-  };
-</script>
 <script src="/path/to/wp-powerbi-embed.js"></script>
 ```
+
+`wp-powerbi-config.js` should set `window.PowerBIEmbedConfig` with your report,
+workspace and dataset IDs. See the provided `wp-powerbi-config.js` file for an
+example.
 
 The script fetches an embed token from your Flask server and renders the report using the Power BI client library.
