@@ -37,6 +37,11 @@
       min-width: 100vw !important;
       overflow: auto !important;
     }
+    #reportContainer,
+    #reportContainer iframe {
+      height: calc(100dvh - 95px) !important;
+      overflow-y: auto !important;
+    }
   }
 
   footer, .site-footer {
