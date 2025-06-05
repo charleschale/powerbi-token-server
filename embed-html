@@ -57,18 +57,14 @@
   }
 </style>
 
-<!-- 1. Declare config up front -->
-<script>
-  window.PowerBIEmbedConfig = {
-    reportId: "a6479e28-0ed5-4515-90ec-af205f635699",
-    groupId: "5c32a84f-0b3d-406c-9097-4930093e3005",
-    datasetId: "340c9e95-0459-4b8b-9e36-9c968643d777"
-  };
-</script>
-
-<!-- 2. Embed container -->
+<!-- 1. Example container with embed attributes -->
 <div id="reportWrapper">
-  <div id="reportContainer">Loading Power BI...</div>
+  <div id="reportContainer"
+       data-report-id="a6479e28-0ed5-4515-90ec-af205f635699"
+       data-group-id="5c32a84f-0b3d-406c-9097-4930093e3005"
+       data-dataset-id="340c9e95-0459-4b8b-9e36-9c968643d777">
+    Loading Power BI...
+  </div>
 </div>
 
 <!-- 3. Embed logic -->
@@ -77,8 +73,12 @@
   sdkScript.src = "https://cdn.jsdelivr.net/npm/powerbi-client@2.21.0/dist/powerbi.min.js";
 
   sdkScript.onload = () => {
-    const configData = window.PowerBIEmbedConfig;
     const container = document.getElementById("reportContainer");
+    const configData = window.PowerBIEmbedConfig || {
+      reportId: container.dataset.reportId,
+      groupId: container.dataset.groupId,
+      datasetId: container.dataset.datasetId,
+    };
 
     const url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
 

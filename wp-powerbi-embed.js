@@ -18,7 +18,11 @@ window.addEventListener('DOMContentLoaded', () => {
   `;
   document.head.appendChild(styleTag);
 
-  const configData = window.PowerBIEmbedConfig || {};
+  const configData = window.PowerBIEmbedConfig || {
+    reportId: container.dataset.reportId,
+    groupId: container.dataset.groupId,
+    datasetId: container.dataset.datasetId,
+  };
   const { reportId, groupId, datasetId } = configData;
 
   console.log("Embed Params:", { reportId, groupId, datasetId });
