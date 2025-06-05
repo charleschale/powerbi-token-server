@@ -1,3 +1,6 @@
+# Ensure packages from requirements.txt are installed before running:
+#   pip install -r requirements.txt
+# See README.md for environment setup instructions.
 import json
 import types
 import builtins
