@@ -87,7 +87,6 @@
         }
 
         const models = window["powerbi-client"].models;
-        const isMobile = window.innerWidth < 768;
         const config = {
           type: "report",
           id: configData.reportId,
@@ -95,7 +94,7 @@
           accessToken: data.token,
           tokenType: models.TokenType.Embed,
           settings: {
-            layoutType: isMobile ? models.LayoutType.Master : models.LayoutType.Custom,
+            layoutType: models.LayoutType.Custom,
             panes: {
               navigationPane: { visible: true },
               pageNavigation: {
