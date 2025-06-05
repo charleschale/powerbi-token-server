@@ -97,7 +97,11 @@
           settings: {
             layoutType: isMobile ? models.LayoutType.Master : models.LayoutType.Custom,
             panes: {
-              navigationPane: { visible: true }
+              navigationPane: { visible: true },
+              pageNavigation: {
+                visible: true,
+                position: models.PageNavigationPosition.Bottom
+              }
             }
           }
         };
