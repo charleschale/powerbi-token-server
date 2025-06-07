@@ -84,12 +84,12 @@ The script fetches an embed token from your Flask server and renders the report 
 
 ### WordPress-ready snippet
 
-An example file `embed-html-wordpress.html` contains the same logic with the stylesheet and script already inlined. Paste that file into a WordPress **Custom HTML** block and replace the `data-*` values with your own IDs. The snippet includes a viewport tag and CSS that adjust the layout when the WordPress admin bar is present.
+An example file `embed-html-wordpress.html` contains the markup needed for a WordPress **Custom HTML** block. It loads the `powerbi-embed.css` stylesheet and the `wp-powerbi-embed.js` script and exposes the same `data-*` attributes for configuration.
 
 ### Testing locally
 
 Copy the `embed-html` file anywhere on your system to try the embed code outside of WordPress. Set the required `data-report-id`, `data-group-id` and `data-dataset-id` attributes to your own IDs. To use a token server other than `https://powerbi-token-server.onrender.com`, provide its address with a `data-server-url` attribute or by defining `window.PowerBIEmbedConfig.serverUrl` before the script loads.
-A WordPress-ready snippet is available in `embed-html-wordpress.html` which inlines the CSS and script. Paste it into a Custom HTML block and edit the IDs as needed.
+A WordPress-ready snippet is available in `embed-html-wordpress.html`. Paste it into a Custom HTML block and edit the IDs as needed.
 
 ## License
 
