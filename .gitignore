@@ -4,6 +4,7 @@ venv/
 .env
 .venv/
 *.py[cod]
+*.pyc
 *.egg-info/
 build/
 dist/
