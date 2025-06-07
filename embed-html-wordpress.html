@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Power BI Embed for WordPress</title>
+  <style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  header, .site-header {
+    z-index: 1100;
+  }
+
+  #reportWrapper,
+  #reportContainer,
+  #reportContainer iframe {
+    position: fixed;
+    top: 95px;
+    left: 0;
+    width: 100vw !important;
+    min-width: 1024px !important;
+    height: calc(100vh - 95px) !important;
+    max-height: calc(100vh - 95px) !important;
+    max-width: 100vw !important;
+    margin: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    z-index: 1000;
+  }
+
+  @media (max-width: 767px) {
+    html,
+    body {
+      overflow: auto;
+    }
+
+  /* Mobile: allow scrolling for tall reports */
+  #reportWrapper {
+    position: static;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  #reportContainer {
+    position: static;
+    width: 100%;
+    height: 75vh !important;
+    max-height: 75vh !important;
+    overflow: hidden;
+  }
+
+  #reportContainer iframe {
+    position: static;
+    height: 100% !important;
+    width: 100% !important;
+    display: block;
+  }
+  }
+
+  footer, .site-footer {
+    display: none !important;
+  }
+
+  body.admin-bar #reportWrapper,
+  body.admin-bar #reportContainer,
+  body.admin-bar #reportContainer iframe {
+    top: 132px;
+    height: calc(100vh - 132px) !important;
+    max-height: calc(100vh - 132px) !important;
+  }
+  </style>
+</head>
+<body>
+<div id="reportWrapper">
+  <div id="reportContainer"
+       data-report-id="YOUR-REPORT-ID"
+       data-group-id="YOUR-GROUP-ID"
+       data-dataset-id="YOUR-DATASET-ID"
+       data-server-url="https://powerbi-token-server.onrender.com">
+    Loading Power BI...
+  </div>
+</div>
+<script>
+window.addEventListener('DOMContentLoaded', () => {
+  const container = document.getElementById('reportContainer');
+  if (!container) {
+    console.error("Power BI container not found.");
+    return;
+  }
+
+  // Ensure embed stylesheet is present
+  const cssId = 'powerbi-embed-styles';
+  if (!document.getElementById(cssId)) {
+    const link = document.createElement('link');
+    link.id = cssId;
+    link.rel = 'stylesheet';
+    const currentScript = document.currentScript;
+    const base = currentScript ? currentScript.src.split('/').slice(0, -1).join('/') + '/' : '';
+    link.href = base + 'powerbi-embed.css';
+    document.head.appendChild(link);
+  }
+
+  const configData = window.PowerBIEmbedConfig || {
+    reportId: container.dataset.reportId,
+    groupId: container.dataset.groupId,
+    datasetId: container.dataset.datasetId,
+  };
+  const { reportId, groupId, datasetId } = configData;
+  const serverUrl =
+    (window.PowerBIEmbedConfig && window.PowerBIEmbedConfig.serverUrl) ||
+    container.dataset.serverUrl ||
+    "https://powerbi-token-server.onrender.com";
+
+  console.log("Embed Params:", { reportId, groupId, datasetId });
+
+  if (!reportId || !groupId || !datasetId) {
+    container.innerText = "Missing embed configuration data.";
+    console.error("Missing report/group/dataset IDs.");
+    return;
+  }
+
+  const sdkScript = document.createElement('script');
+  sdkScript.src = 'https://cdn.jsdelivr.net/npm/powerbi-client@2.21.0/dist/powerbi.min.js';
+
+  sdkScript.onload = () => {
+    const base = serverUrl.replace(/\/+$/, "");
+    const url = `${base}/getEmbedToken?reportId=${reportId}&groupId=${groupId}&datasetId=${datasetId}`;
+    console.log("Fetching token from:", url);
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        console.log("Server Response:", data);
+        if (!data.token || !data.embedUrl) {
+          container.innerText = "Failed to load embed config.";
+          console.error("Embed token response invalid:", data);
+          return;
+        }
+
+        const models = window['powerbi-client'].models;
+
+        const config = {
+          type: 'report',
+          id: data.reportId,
+          embedUrl: data.embedUrl,
+          accessToken: data.token,
+          tokenType: models.TokenType.Embed,
+          settings: {
+            layoutType: models.LayoutType.Custom,
+            navContentPaneEnabled: true,
+            panes: {
+              navigationPane: { visible: true },
+              pageNavigation: {
+                visible: true,
+                position: models.PageNavigationPosition.Bottom
+              }
+            }
+          }
+        };
+
+        container.innerHTML = '';
+        window.powerbi.embed(container, config);
+      })
+      .catch(err => {
+        container.innerText = "Failed to load Power BI report.";
+        console.error("Power BI embed fetch error:", err);
+      });
+  };
+
+  sdkScript.onerror = () => {
+    container.innerText = "Failed to load Power BI SDK.";
+    console.error("Power BI SDK load error.");
+  };
+
+  document.body.appendChild(sdkScript);
+});
+</script>
+</body>
+</html>
+
