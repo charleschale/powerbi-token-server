@@ -66,3 +66,7 @@ The script fetches an embed token from your Flask server and renders the report 
 ### Testing locally
 
 Copy the `embed-html` file anywhere on your system to try the embed code outside of WordPress. Update its `data-report-id`, `data-group-id` and `data-dataset-id` attributes with your own IDs. When testing against a local token server, set a `data-server-url` attribute (or define `window.PowerBIEmbedConfig.serverUrl` before the script loads) to override the default token endpoint.
+
+## License
+
+This project is licensed under the [MIT License](LICENSE).
