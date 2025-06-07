@@ -21,6 +21,9 @@
   #reportContainer iframe {
     position: fixed;
     top: var(--header-height);
+    bottom: 0;
+    left: 0;
+    width: 100vw !important;
     left: 0;
     width: 100vw !important;
     height: calc(100vh - var(--header-height)) !important;
@@ -33,6 +36,19 @@
     z-index: 1000;
   }
 
+@supports not (height: 100dvh) {
+  #reportWrapper,
+  #reportContainer,
+  #reportContainer iframe {
+    height: calc(100vh - var(--header-height));
+  }
+
+  body.admin-bar #reportWrapper,
+  body.admin-bar #reportContainer,
+  body.admin-bar #reportContainer iframe {
+    height: calc(100vh - 132px);
+  }
+}
 
   @media (max-width: 767px) {
     html,
@@ -58,8 +74,7 @@
   body.admin-bar #reportContainer,
   body.admin-bar #reportContainer iframe {
     top: 132px;
-    height: calc(100vh - 132px) !important;
-    max-height: calc(100vh - 132px) !important;
+    bottom: 0;
   }
 
   @supports (height: 100dvh) {
@@ -87,7 +102,6 @@
     Loading Power BI...
   </div>
 </div>
-
 <script>
   const sdkScript = document.createElement("script");
   sdkScript.src = "https://cdn.jsdelivr.net/npm/powerbi-client@2.21.0/dist/powerbi.min.js";
