@@ -37,16 +37,14 @@
     #reportWrapper,
     #reportContainer,
     #reportContainer iframe {
-      position: static;
-      top: auto;
-      left: auto;
-      width: 100% !important;
-      min-width: 0 !important;
-      height: auto !important;
-      min-height: 100svh;
-      max-height: none !important;
-      max-width: 100% !important;
-      overflow: visible !important;
+      min-width: 100vw !important;
+      overflow: auto !important;
+    }
+
+    #reportContainer,
+    #reportContainer iframe {
+      height: calc(100dvh - 95px) !important;
+      overflow-y: auto !important;
     }
   }
 
