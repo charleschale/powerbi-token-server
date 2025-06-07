@@ -1,0 +1,134 @@
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  header, .site-header {
+    z-index: 1100;
+  }
+
+  #reportWrapper,
+  #reportContainer,
+  #reportContainer iframe {
+    position: fixed;
+    top: 95px;
+    left: 0;
+    width: 100vw !important;
+    min-width: 1024px !important;
+    height: calc(100vh - 95px) !important;
+    max-height: calc(100vh - 95px) !important;
+    max-width: 100vw !important;
+    margin: 0;
+    padding: 0;
+    border: none;
+    overflow: hidden;
+    z-index: 1000;
+  }
+
+  @media (max-width: 767px) {
+    html,
+    body {
+      overflow: auto;
+    }
+
+    #reportWrapper,
+    #reportContainer,
+    #reportContainer iframe {
+      position: static;
+      width: 100%;
+      height: auto;
+      min-height: 100svh;
+      overflow: visible;
+    }
+  }
+
+  footer, .site-footer {
+    display: none !important;
+  }
+
+  body.admin-bar #reportWrapper,
+  body.admin-bar #reportContainer,
+  body.admin-bar #reportContainer iframe {
+    top: 132px;
+    height: calc(100vh - 132px) !important;
+    max-height: calc(100vh - 132px) !important;
+  }
+</style>
+
+<div id="reportWrapper">
+  <div id="reportContainer"
+       data-report-id="4161a7fc-29dc-417f-9e37-1a2c588d7d65"
+       data-group-id="5c32a84f-0b3d-406c-9097-4930093e3005"
+       data-dataset-id="2fec5575-9628-4a8b-a99c-c689acb7efd">
+    Loading Power BI...
+  </div>
+</div>
+
+<script>
+  const sdkScript = document.createElement("script");
+  sdkScript.src = "https://cdn.jsdelivr.net/npm/powerbi-client@2.21.0/dist/powerbi.min.js";
+
+  sdkScript.onload = () => {
+    const container = document.getElementById("reportContainer");
+    const configData = window.PowerBIEmbedConfig || {
+      reportId: container.dataset.reportId,
+      groupId: container.dataset.groupId,
+      datasetId: container.dataset.datasetId,
+    };
+
+    const url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
+
+    fetch(url)
+      .then(res => res.json())
+      .then(data => {
+        if (!data.token || !data.embedUrl) {
+          container.innerText = "Invalid token response.";
+          console.error("Token response error:", data);
+          return;
+        }
+
+        const models = window["powerbi-client"].models;
+        const config = {
+          type: "report",
+          id: configData.reportId,
+          embedUrl: data.embedUrl,
+          accessToken: data.token,
+          tokenType: models.TokenType.Embed,
+          settings: {
+            layoutType: models.LayoutType.Custom,
+            panes: {
+              navigationPane: { visible: true },
+              pageNavigation: {
+                visible: true,
+                position: models.PageNavigationPosition.Bottom
+              }
+            }
+          }
+        };
+
+        container.innerHTML = "";
+        const report = powerbi.embed(container, config);
+        report.on("loaded", () => console.log("✅ Power BI report loaded"));
+        report.on("error", err => {
+          console.error("❌ Power BI render error:", err.detail);
+          container.innerText = "Power BI failed to render.";
+        });
+      })
+      .catch(err => {
+        console.error("Fetch error:", err);
+        container.innerText = "Failed to fetch embed token.";
+      });
+  };
+
+  sdkScript.onerror = () => {
+    console.error("❌ Failed to load Power BI SDK");
+    document.getElementById("reportContainer").innerText = "Failed to load SDK.";
+  };
+
+  document.body.appendChild(sdkScript);
+</script>
