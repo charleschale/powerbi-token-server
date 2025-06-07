@@ -62,11 +62,12 @@
 </style>
 
 <!-- 1. Example container with embed attributes -->
-<div id="reportWrapper">
-  <div id="reportContainer"
-       data-report-id="4161a7fc-29dc-417f-9e37-1a2c588d7d65"
-       data-group-id="5c32a84f-0b3d-406c-9097-4930093e3005"
-       data-dataset-id="2fec5575-9628-4a8b-a99c-c689acb7efd">
+  <div id="reportWrapper">
+    <div id="reportContainer"
+         data-report-id="4161a7fc-29dc-417f-9e37-1a2c588d7d65"
+         data-group-id="5c32a84f-0b3d-406c-9097-4930093e3005"
+         data-dataset-id="2fec5575-9628-4a8b-a99c-c689acb7efd"
+         data-server-url="http://localhost:5000">
     Loading Power BI...
   </div>
 </div>
@@ -83,8 +84,10 @@
       groupId: container.dataset.groupId,
       datasetId: container.dataset.datasetId,
     };
-
-    const url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
+    const base = (window.PowerBIEmbedConfig && window.PowerBIEmbedConfig.serverUrl) ||
+                 container.dataset.serverUrl ||
+                 "https://powerbi-token-server.onrender.com";
+    const url = `${base.replace(/\/+$/, '')}/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
 
     fetch(url)
       .then(res => res.json())

@@ -55,7 +55,8 @@ Include `powerbi-embed.css` and `wp-powerbi-embed.js` on your WordPress page and
 <div id="reportContainer"
      data-report-id="<report-id>"
      data-group-id="<workspace-id>"
-     data-dataset-id="<dataset-id>">
+     data-dataset-id="<dataset-id>"
+     data-server-url="http://localhost:5000"><!-- optional override -->
   Loading Power BI...
 </div>
 <script src="/path/to/wp-powerbi-embed.js"></script>
@@ -65,7 +66,7 @@ The script fetches an embed token from your Flask server and renders the report 
 
 ### Testing locally
 
-Copy the `embed-html` file anywhere on your system to try the embed code outside of WordPress. Update its `data-report-id`, `data-group-id` and `data-dataset-id` attributes with your own IDs. When testing against a local token server, set a `data-server-url` attribute (or define `window.PowerBIEmbedConfig.serverUrl` before the script loads) to override the default token endpoint.
+Copy the `embed-html` file anywhere on your system to try the embed code outside of WordPress. Update its `data-report-id`, `data-group-id` and `data-dataset-id` attributes with your own IDs. When testing against a local token server, set a `data-server-url` attribute (or define `window.PowerBIEmbedConfig.serverUrl` before the script loads) to override the default token endpoint (which is `https://powerbi-token-server.onrender.com`).
 
 ## License
 
