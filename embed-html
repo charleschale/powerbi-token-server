@@ -77,13 +77,14 @@
 
   sdkScript.onload = () => {
     const container = document.getElementById("reportContainer");
-    const configData = window.PowerBIEmbedConfig || {
-      reportId: container.dataset.reportId,
-      groupId: container.dataset.groupId,
-      datasetId: container.dataset.datasetId,
-    };
+    const configData = window.PowerBIEmbedConfig || {};
+    configData.reportId = configData.reportId || container.dataset.reportId;
+    configData.groupId = configData.groupId || container.dataset.groupId;
+    configData.datasetId = configData.datasetId || container.dataset.datasetId;
+    configData.serverUrl = (configData.serverUrl || container.dataset.serverUrl ||
+      "https://powerbi-token-server.onrender.com").replace(/\/?$/, "");
 
-    const url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
+    const url = `${configData.serverUrl}/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
 
     fetch(url)
       .then(res => res.json())

@@ -17,14 +17,14 @@ window.addEventListener('DOMContentLoaded', () => {
     document.head.appendChild(link);
   }
 
-  const configData = window.PowerBIEmbedConfig || {
-    reportId: container.dataset.reportId,
-    groupId: container.dataset.groupId,
-    datasetId: container.dataset.datasetId,
-  };
-  const { reportId, groupId, datasetId } = configData;
+  const configData = window.PowerBIEmbedConfig || {};
+  const reportId = configData.reportId || container.dataset.reportId;
+  const groupId = configData.groupId || container.dataset.groupId;
+  const datasetId = configData.datasetId || container.dataset.datasetId;
+  const serverUrl = (configData.serverUrl || container.dataset.serverUrl ||
+    'https://powerbi-token-server.onrender.com').replace(/\/?$/, '');
 
-  console.log("Embed Params:", { reportId, groupId, datasetId });
+  console.log("Embed Params:", { reportId, groupId, datasetId, serverUrl });
 
   if (!reportId || !groupId || !datasetId) {
     container.innerText = "Missing embed configuration data.";
@@ -36,7 +36,7 @@ window.addEventListener('DOMContentLoaded', () => {
   sdkScript.src = 'https://cdn.jsdelivr.net/npm/powerbi-client@2.21.0/dist/powerbi.min.js';
 
   sdkScript.onload = () => {
-    const url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${reportId}&groupId=${groupId}&datasetId=${datasetId}`;
+    const url = `${serverUrl}/getEmbedToken?reportId=${reportId}&groupId=${groupId}&datasetId=${datasetId}`;
     console.log("Fetching token from:", url);
 
     fetch(url)
