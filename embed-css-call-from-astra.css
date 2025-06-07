@@ -1,3 +1,7 @@
+  :root {
+    --header-height: 95px;
+  }
+
   html, body {
     margin: 0;
     padding: 0;
@@ -14,7 +18,7 @@
   #reportContainer,
   #reportContainer iframe {
     position: fixed;
-    top: 95px;
+    top: var(--header-height);
     bottom: 0;
     left: 0;
     width: 100vw !important;
@@ -30,7 +34,7 @@
   #reportWrapper,
   #reportContainer,
   #reportContainer iframe {
-    height: calc(100vh - 95px);
+    height: calc(100vh - var(--header-height));
   }
 
   body.admin-bar #reportWrapper,
@@ -44,8 +48,8 @@
     #reportWrapper,
     #reportContainer,
     #reportContainer iframe {
-      height: calc(100dvh - 95px) !important;
-      max-height: calc(100dvh - 95px) !important;
+      height: calc(100dvh - var(--header-height)) !important;
+      max-height: calc(100dvh - var(--header-height)) !important;
     }
 
     body.admin-bar #reportWrapper,
@@ -66,15 +70,15 @@
   #reportWrapper {
     position: static;
     width: 100%;
-    height: calc(100vh - 95px);
+    height: calc(100vh - var(--header-height));
     overflow: auto;
   }
 
   #reportContainer {
     position: static;
     width: 100%;
-    height: calc(100vh - 95px) !important;
-    max-height: calc(100vh - 95px) !important;
+    height: calc(100vh - var(--header-height)) !important;
+    max-height: calc(100vh - var(--header-height)) !important;
     overflow: auto;
   }
 
