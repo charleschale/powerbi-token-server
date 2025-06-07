@@ -63,6 +63,6 @@ Include `powerbi-embed.css` and `wp-powerbi-embed.js` on your WordPress page and
 
 The script fetches an embed token from your Flask server and renders the report using the Power BI client library.
 
-## Testing locally
+### Testing locally
 
-The `embed-html` file demonstrates the Power BI container, required CSS and the embed logic in a single document. Update the `data-report-id`, `data-group-id` and `data-dataset-id` attributes with your own IDs. When testing against a local token server you can also set a `data-server-url` attribute (or define `window.PowerBIEmbedConfig.serverUrl` before the script loads) to override the token endpoint.
+Copy the `embed-html` file anywhere on your system to try the embed code outside of WordPress. Update its `data-report-id`, `data-group-id` and `data-dataset-id` attributes with your own IDs. When testing against a local token server, set a `data-server-url` attribute (or define `window.PowerBIEmbedConfig.serverUrl` before the script loads) to override the default token endpoint.
