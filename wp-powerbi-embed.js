@@ -23,6 +23,10 @@ window.addEventListener('DOMContentLoaded', () => {
     datasetId: container.dataset.datasetId,
   };
   const { reportId, groupId, datasetId } = configData;
+  const serverUrl =
+    (window.PowerBIEmbedConfig && window.PowerBIEmbedConfig.serverUrl) ||
+    container.dataset.serverUrl ||
+    "https://powerbi-token-server.onrender.com";
 
   console.log("Embed Params:", { reportId, groupId, datasetId });
 
@@ -36,7 +40,8 @@ window.addEventListener('DOMContentLoaded', () => {
   sdkScript.src = 'https://cdn.jsdelivr.net/npm/powerbi-client@2.21.0/dist/powerbi.min.js';
 
   sdkScript.onload = () => {
-    const url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${reportId}&groupId=${groupId}&datasetId=${datasetId}`;
+    const base = serverUrl.replace(/\/+$/, "");
+    const url = `${base}/getEmbedToken?reportId=${reportId}&groupId=${groupId}&datasetId=${datasetId}`;
     console.log("Fetching token from:", url);
 
     fetch(url)
