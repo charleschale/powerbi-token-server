@@ -1,10 +1,20 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<!--
+  Mobile-friendly version with dynamic viewport height.
+  Keeps header fixed and makes report container adapt to address bar changes.
+-->
 <style>
   html, body {
     margin: 0;
     min-height: 100svh;
     width: 100%;
     overflow: auto;
+  }
+
+  @supports (height: 100dvh) {
+    html, body {
+      min-height: 100dvh;
+    }
   }
 
   body {
@@ -53,7 +63,15 @@
       position: static;
       width: 100%;
       height: calc(100svh - 95px);
-      overflow: visible;
+      overflow: auto;
+    }
+
+    @supports (height: 100dvh) {
+      #reportWrapper,
+      #reportContainer,
+      #reportContainer iframe {
+        height: calc(100dvh - 95px);
+      }
     }
   }
 
@@ -65,8 +83,18 @@
   body.admin-bar #reportContainer,
   body.admin-bar #reportContainer iframe {
     top: 132px;
-    height: calc(100vh - 132px) !important;
-    max-height: calc(100vh - 132px) !important;
+    height: calc(100svh - 132px) !important;
+    max-height: calc(100svh - 132px) !important;
+    overflow: auto;
+  }
+
+  @supports (height: 100dvh) {
+    body.admin-bar #reportWrapper,
+    body.admin-bar #reportContainer,
+    body.admin-bar #reportContainer iframe {
+      height: calc(100dvh - 132px) !important;
+      max-height: calc(100dvh - 132px) !important;
+    }
   }
 </style>
 
