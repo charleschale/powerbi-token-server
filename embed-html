@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Power BI Embed</title>
-  <link rel="stylesheet" href="powerbi-embed.css">
+  <link id="powerbi-embed-styles" rel="stylesheet" href="powerbi-embed.css">
 </head>
 <body>
 
