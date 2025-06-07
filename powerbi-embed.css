@@ -38,15 +38,10 @@
     #reportContainer,
     #reportContainer iframe {
       position: static;
-      top: auto;
-      left: auto;
-      width: 100% !important;
-      min-width: 0 !important;
-      height: auto !important;
+      width: 100%;
+      height: auto;
       min-height: 100svh;
-      max-height: none !important;
-      max-width: 100% !important;
-      overflow: visible !important;
+      overflow: visible;
     }
   }
 
