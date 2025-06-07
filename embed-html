@@ -21,9 +21,9 @@
 <!-- Power BI embed config -->
 <script>
   window.PowerBIEmbedConfig = {
-    reportId: "YOUR-REPORT-ID",
-    groupId: "YOUR-GROUP-ID",
-    datasetId: "YOUR-DATASET-ID",
+    reportId: "4161a7fc-29dc-417f-9e37-1a2c588d7d65",
+    groupId: "5c32a84f-0b3d-406c-9097-4930093e3005",
+    datasetId: "2fec5575-9628-4a8b-a99c-c689acb7efd",
     serverUrl: "http://localhost:5000"  // optional
   };
 </script>
