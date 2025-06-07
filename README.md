@@ -63,6 +63,16 @@ Include `wp-powerbi-embed.js` on your WordPress page and provide the report info
 <script src="/path/to/wp-powerbi-embed.js"></script>
 ```
 
+The stylesheet defines a `--header-height` CSS custom property with a default
+value of `95px`. Override this variable in your own CSS if your theme's header
+height differs:
+
+```css
+:root {
+  --header-height: 80px;
+}
+```
+
 By default the script contacts `https://powerbi-token-server.onrender.com` for tokens.
 To use a different endpoint, provide a `data-server-url` attribute or define
 `window.PowerBIEmbedConfig.serverUrl` before the script loads:
