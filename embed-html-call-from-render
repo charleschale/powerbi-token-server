@@ -17,10 +17,9 @@
   #reportContainer iframe {
     position: fixed;
     top: 95px;
+    bottom: 0;
     left: 0;
     width: 100vw !important;
-    height: calc(100vh - 95px) !important;
-    max-height: calc(100vh - 95px) !important;
     max-width: 100vw !important;
     margin: 0;
     padding: 0;
@@ -29,6 +28,19 @@
     z-index: 1000;
   }
 
+@supports not (height: 100dvh) {
+  #reportWrapper,
+  #reportContainer,
+  #reportContainer iframe {
+    height: calc(100vh - 95px);
+  }
+
+  body.admin-bar #reportWrapper,
+  body.admin-bar #reportContainer,
+  body.admin-bar #reportContainer iframe {
+    height: calc(100vh - 132px);
+  }
+}
 
   @media (max-width: 767px) {
     #reportWrapper,
@@ -49,8 +61,7 @@
   body.admin-bar #reportContainer,
   body.admin-bar #reportContainer iframe {
     top: 132px;
-    height: calc(100vh - 132px) !important;
-    max-height: calc(100vh - 132px) !important;
+    bottom: 0;
   }
 
   @supports (height: 100dvh) {
