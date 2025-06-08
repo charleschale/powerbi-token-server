@@ -47,7 +47,7 @@
   body.admin-bar #reportWrapper,
   body.admin-bar #reportContainer,
   body.admin-bar #reportContainer iframe {
-    height: calc(100vh - 132px);
+    height: calc(100vh - var(--header-height));
   }
 }
 
@@ -74,7 +74,7 @@
   body.admin-bar #reportWrapper,
   body.admin-bar #reportContainer,
   body.admin-bar #reportContainer iframe {
-    top: 132px;
+    top: var(--header-height);
     bottom: 0;
   }
 
@@ -89,8 +89,8 @@
   body.admin-bar #reportWrapper,
   body.admin-bar #reportContainer,
   body.admin-bar #reportContainer iframe {
-    height: calc(100dvh - 132px) !important;
-    max-height: calc(100dvh - 132px) !important;
+    height: calc(100dvh - var(--header-height)) !important;
+    max-height: calc(100dvh - var(--header-height)) !important;
   }
 }
 
@@ -104,13 +104,13 @@
   body.admin-bar #reportWrapper,
   body.admin-bar #reportContainer,
   body.admin-bar #reportContainer iframe {
-    height: calc(100svh - 132px) !important;
-    max-height: calc(100svh - 132px) !important;
+    height: calc(100svh - var(--header-height)) !important;
+    max-height: calc(100svh - var(--header-height)) !important;
   }
 }
 </style>
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
+  function updateHeaderOffset() {
     const header = document.querySelector('header');
     const adminBar = document.getElementById('wpadminbar');
     let offset = 0;
@@ -122,6 +122,11 @@
       offset += adminBar.offsetHeight;
     }
     document.documentElement.style.setProperty('--header-height', offset + 'px');
+  }
+
+  document.addEventListener('DOMContentLoaded', updateHeaderOffset);
+  window.addEventListener('load', updateHeaderOffset);
+  window.addEventListener('resize', updateHeaderOffset);
   });
 </script>
 
