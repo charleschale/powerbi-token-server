@@ -1,5 +1,23 @@
 const thisScript = document.currentScript;
 
+function updateHeaderOffset() {
+  const header = document.querySelector('header');
+  const adminBar = document.getElementById('wpadminbar');
+  let offset = 0;
+  if (header) {
+    const style = getComputedStyle(header);
+    offset = header.offsetHeight + parseFloat(style.marginBottom || '0');
+  }
+  if (adminBar) {
+    offset += adminBar.offsetHeight;
+  }
+  document.documentElement.style.setProperty('--header-height', offset + 'px');
+}
+
+window.addEventListener('DOMContentLoaded', updateHeaderOffset);
+window.addEventListener('load', updateHeaderOffset);
+window.addEventListener('resize', updateHeaderOffset);
+
 window.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('reportContainer');
   if (!container) {
