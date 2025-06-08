@@ -10,6 +10,9 @@ function updateHeaderOffset() {
       header.offsetHeight +
       parseFloat(style.marginBottom || '0') +
       parseFloat(style.borderBottomWidth || '0');
+    header.offsetHeight +
+    parseFloat(style.marginBottom || '0') +
+    parseFloat(style.borderBottomWidth || '0');
   }
   if (adminBar) {
     offset += adminBar.offsetHeight;
@@ -31,6 +34,9 @@ window.addEventListener('DOMContentLoaded', () => {
       header.offsetHeight +
       parseFloat(style.marginBottom || '0') +
       parseFloat(style.borderBottomWidth || '0');
+    header.offsetHeight +
+    parseFloat(style.marginBottom || '0') +
+    parseFloat(style.borderBottomWidth || '0');
   }
   if (adminBar) {
     offset += adminBar.offsetHeight;
