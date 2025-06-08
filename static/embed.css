@@ -48,6 +48,24 @@
   }
 }
 
+@supports (height: 100dvh) {
+  #reportWrapper,
+  #reportContainer,
+  #reportContainer iframe {
+    height: calc(100dvh - var(--header-height)) !important;
+    max-height: calc(100dvh - var(--header-height)) !important;
+  }
+}
+
+@supports (height: 100svh) {
+  #reportWrapper,
+  #reportContainer,
+  #reportContainer iframe {
+    height: calc(100svh - var(--header-height)) !important;
+    max-height: calc(100svh - var(--header-height)) !important;
+  }
+}
+
 
 
 
@@ -114,35 +132,3 @@
     max-height: calc(100vh - 132px) !important;
   }
 
-  @media (min-width: 768px) {
-    @supports (height: 100dvh) {
-      #reportWrapper,
-      #reportContainer,
-      #reportContainer iframe {
-        height: calc(100dvh - var(--header-height)) !important;
-        max-height: calc(100dvh - var(--header-height)) !important;
-      }
-
-      body.admin-bar #reportWrapper,
-      body.admin-bar #reportContainer,
-      body.admin-bar #reportContainer iframe {
-        height: calc(100dvh - 132px) !important;
-        max-height: calc(100dvh - 132px) !important;
-      }
-    }
-
-    @supports (height: 100svh) {
-      #reportWrapper,
-      #reportContainer,
-      #reportContainer iframe {
-        height: calc(100svh - var(--header-height)) !important;
-        max-height: calc(100svh - var(--header-height)) !important;
-      }
-      body.admin-bar #reportWrapper,
-      body.admin-bar #reportContainer,
-      body.admin-bar #reportContainer iframe {
-        height: calc(100svh - 132px) !important;
-        max-height: calc(100svh - 132px) !important;
-      }
-    }
-  }
