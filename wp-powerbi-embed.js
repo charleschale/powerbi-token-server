@@ -1,4 +1,13 @@
 window.addEventListener('DOMContentLoaded', () => {
+  // Dynamically calculate the total header height including the WP admin bar
+  const header = document.querySelector('header');
+  let offset = header ? header.offsetHeight : 0;
+  const adminBar = document.getElementById('wpadminbar');
+  if (adminBar) {
+    offset += adminBar.offsetHeight;
+  }
+  document.documentElement.style.setProperty('--header-height', offset + 'px');
+
   const container = document.getElementById('reportContainer');
   if (!container) {
     console.error("Power BI container not found.");
