@@ -4,7 +4,7 @@ import msal
 import requests
 import os
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static', static_folder='static')
 CORS(app, origins=["https://work.hale.global"])  # Update this to your WP domain
 
 TENANT_ID = "3be3af3c-46a1-461d-93b1-44954da5e032"
