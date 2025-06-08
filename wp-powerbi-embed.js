@@ -8,8 +8,7 @@ function updateHeaderOffset() {
     const style = getComputedStyle(header);
     offset =
       header.offsetHeight +
-      parseFloat(style.marginBottom || '0') +
-      parseFloat(style.borderBottomWidth || '0');
+      parseFloat(style.marginBottom || '0');
   }
   if (adminBar) {
     offset += adminBar.offsetHeight;
@@ -29,8 +28,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const style = getComputedStyle(header);
     offset =
       header.offsetHeight +
-      parseFloat(style.marginBottom || '0') +
-      parseFloat(style.borderBottomWidth || '0');
+      parseFloat(style.marginBottom || '0');
   }
   if (adminBar) {
     offset += adminBar.offsetHeight;
