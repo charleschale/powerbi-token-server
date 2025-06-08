@@ -6,7 +6,10 @@ function updateHeaderOffset() {
   let offset = 0;
   if (header) {
     const style = getComputedStyle(header);
-    offset = header.offsetHeight + parseFloat(style.marginBottom || '0');
+    offset =
+    header.offsetHeight +
+    parseFloat(style.marginBottom || '0') +
+    parseFloat(style.borderBottomWidth || '0');
   }
   if (adminBar) {
     offset += adminBar.offsetHeight;
@@ -24,7 +27,10 @@ window.addEventListener('DOMContentLoaded', () => {
   let offset = 0;
   if (header) {
     const style = getComputedStyle(header);
-    offset = header.offsetHeight + parseFloat(style.marginBottom || '0');
+    offset =
+    header.offsetHeight +
+    parseFloat(style.marginBottom || '0') +
+    parseFloat(style.borderBottomWidth || '0');
   }
   if (adminBar) {
     offset += adminBar.offsetHeight;
