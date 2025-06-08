@@ -52,6 +52,10 @@
 }
 
   @media (max-width: 767px) {
+    :root {
+      --header-height: 80px;
+    }
+
     #reportWrapper,
     #reportContainer,
     #reportContainer iframe {

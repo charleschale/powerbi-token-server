@@ -65,6 +65,10 @@
   }
 
   @media (max-width: 767px) {
+    :root {
+      --header-height: 80px;
+    }
+
     html,
     body {
       overflow: auto;
