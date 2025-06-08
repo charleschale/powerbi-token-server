@@ -1,3 +1,5 @@
+const thisScript = document.currentScript;
+
 window.addEventListener('DOMContentLoaded', () => {
   const container = document.getElementById('reportContainer');
   if (!container) {
@@ -11,8 +13,7 @@ window.addEventListener('DOMContentLoaded', () => {
     const link = document.createElement('link');
     link.id = cssId;
     link.rel = 'stylesheet';
-    const currentScript = document.currentScript;
-    const base = currentScript ? currentScript.src.split('/').slice(0, -1).join('/') + '/' : '';
+    const base = thisScript ? thisScript.src.split('/').slice(0, -1).join('/') + '/' : '';
     link.href = base + 'powerbi-embed.css';
     document.head.appendChild(link);
   }
