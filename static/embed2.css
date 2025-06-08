@@ -1,0 +1,53 @@
+/* embed2 variant: reduce header offset by 3px using top/bottom sizing */
+:root {
+  --header-height: 95px;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+}
+
+header, .site-header {
+  z-index: 1100;
+}
+
+#reportWrapper,
+#reportContainer,
+#reportContainer iframe {
+  position: fixed;
+  top: calc(var(--header-height) - 3px);
+  bottom: env(safe-area-inset-bottom, 0);
+  left: 0;
+  width: 100vw !important;
+  max-width: 100vw !important;
+  margin: 0;
+  padding: 0;
+  border: none;
+  overflow: auto;
+  z-index: 1000;
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 80px;
+  }
+
+  #reportWrapper,
+  #reportContainer,
+  #reportContainer iframe {
+    position: fixed;
+    top: calc(var(--header-height) - 3px);
+    bottom: env(safe-area-inset-bottom, 0);
+    left: 0;
+    width: 100vw !important;
+    max-width: 100vw !important;
+    overflow: auto;
+  }
+}
+
+footer, .site-footer {
+  display: none !important;
+}
