@@ -7,6 +7,9 @@ function updateHeaderOffset() {
   if (header) {
     const style = getComputedStyle(header);
     offset =
+      header.offsetHeight +
+      parseFloat(style.marginBottom || '0') +
+      parseFloat(style.borderBottomWidth || '0');
     header.offsetHeight +
     parseFloat(style.marginBottom || '0') +
     parseFloat(style.borderBottomWidth || '0');
@@ -28,6 +31,9 @@ window.addEventListener('DOMContentLoaded', () => {
   if (header) {
     const style = getComputedStyle(header);
     offset =
+      header.offsetHeight +
+      parseFloat(style.marginBottom || '0') +
+      parseFloat(style.borderBottomWidth || '0');
     header.offsetHeight +
     parseFloat(style.marginBottom || '0') +
     parseFloat(style.borderBottomWidth || '0');
