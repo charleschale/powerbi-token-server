@@ -129,7 +129,6 @@
   document.addEventListener('DOMContentLoaded', updateHeaderOffset);
   window.addEventListener('load', updateHeaderOffset);
   window.addEventListener('resize', updateHeaderOffset);
-  });
 </script>
 
 <div id="reportWrapper">
