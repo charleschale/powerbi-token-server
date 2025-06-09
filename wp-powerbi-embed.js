@@ -111,7 +111,21 @@ window.addEventListener('DOMContentLoaded', () => {
         };
 
         container.innerHTML = '';
-        window.powerbi.embed(container, config);
+
+        const overlay = document.createElement('div');
+        overlay.id = 'powerbi-loading';
+        overlay.textContent = 'Loading Power BI...';
+        container.appendChild(overlay);
+
+        const report = window.powerbi.embed(container, config);
+        report.on('loaded', () => {
+          overlay.remove();
+        });
+        report.on('error', err => {
+          overlay.remove();
+          container.innerText = 'Power BI failed to render.';
+          console.error('Power BI render error:', err.detail);
+        });
       })
       .catch(err => {
         container.innerText = "Failed to load Power BI report.";
