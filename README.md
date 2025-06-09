@@ -101,6 +101,17 @@ An example file `embed-html-wordpress.html` contains the markup needed for a Wor
 Copy the `embed-html` file anywhere on your system to try the embed code outside of WordPress. Set the required `data-report-id`, `data-group-id` and `data-dataset-id` attributes to your own IDs. To use a token server other than `https://powerbi-token-server.onrender.com`, provide its address with a `data-server-url` attribute or by defining `window.PowerBIEmbedConfig.serverUrl` before the script loads.
 A WordPress-ready snippet is available in `embed-html-wordpress.html`. Paste it into a Custom HTML block and edit the IDs as needed.
 
+## Running tests
+
+Install the dependencies before running the test suite so `pytest` can import the `app` module:
+
+```bash
+pip install -r requirements.txt
+pytest
+```
+
+The CI workflow under `.github/workflows/python-tests.yml` installs the same packages automatically.
+
 ## License
 
 This project is licensed under the [MIT License](LICENSE).
