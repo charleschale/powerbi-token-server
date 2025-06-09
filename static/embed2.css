@@ -65,7 +65,7 @@ header,
     position: static;
     width: 100%;
     height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
-    max-height: calc(100vh - var(--header-height)) !important;
+    max-height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
     overflow: auto;
   }
 
@@ -73,7 +73,7 @@ header,
     #reportWrapper,
     #reportContainer {
       height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
-      max-height: calc(100dvh - var(--header-height)) !important;
+      max-height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
     }
   }
 
@@ -81,7 +81,7 @@ header,
     #reportWrapper,
     #reportContainer {
       height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
-      max-height: calc(100svh - var(--header-height)) !important;
+      max-height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
     }
   }
 
@@ -104,7 +104,7 @@ footer,
     #reportContainer,
     #reportContainer iframe {
       height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
-      max-height: calc(100dvh - var(--header-height)) !important;
+      max-height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
     }
   }
 
@@ -113,7 +113,7 @@ footer,
     #reportContainer,
     #reportContainer iframe {
       height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
-      max-height: calc(100svh - var(--header-height)) !important;
+      max-height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
     }
   }
 }
