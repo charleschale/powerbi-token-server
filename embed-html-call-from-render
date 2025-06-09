@@ -183,9 +183,11 @@
           }
         };
 
-        container.innerHTML = "";
         const report = powerbi.embed(container, config);
-        report.on("loaded", () => console.log("✅ Power BI report loaded"));
+        report.on("loaded", () => {
+          container.innerHTML = "";
+          console.log("✅ Power BI report loaded");
+        });
         report.on("error", err => {
           console.error("❌ Power BI render error:", err.detail);
           container.innerText = "Power BI failed to render.";
