@@ -71,6 +71,25 @@ window.addEventListener('DOMContentLoaded', () => {
     return;
   }
 
+  // Show loading overlay
+  const loading = document.createElement('div');
+  loading.id = 'powerbi-loading';
+  loading.textContent = 'Loading Power BI...';
+  loading.style.position = 'absolute';
+  loading.style.top = '0';
+  loading.style.left = '0';
+  loading.style.right = '0';
+  loading.style.bottom = '0';
+  loading.style.display = 'flex';
+  loading.style.alignItems = 'center';
+  loading.style.justifyContent = 'center';
+  loading.style.backgroundColor = 'rgba(255, 255, 255, 0.8)';
+  loading.style.zIndex = '2000';
+  if (getComputedStyle(container).position === 'static') {
+    container.style.position = 'relative';
+  }
+  container.appendChild(loading);
+
   const sdkScript = document.createElement('script');
   sdkScript.src = 'https://cdn.jsdelivr.net/npm/powerbi-client@2.21.0/dist/powerbi.min.js';
 
@@ -86,6 +105,7 @@ window.addEventListener('DOMContentLoaded', () => {
         if (!data.token || !data.embedUrl) {
           container.innerText = "Failed to load embed config.";
           console.error("Embed token response invalid:", data);
+          loading.remove();
           return;
         }
 
@@ -111,17 +131,21 @@ window.addEventListener('DOMContentLoaded', () => {
         };
 
         container.innerHTML = '';
-        window.powerbi.embed(container, config);
+        const report = window.powerbi.embed(container, config);
+        report.on('loaded', () => loading.remove());
+        report.on('error', () => loading.remove());
       })
       .catch(err => {
         container.innerText = "Failed to load Power BI report.";
         console.error("Power BI embed fetch error:", err);
+        loading.remove();
       });
   };
 
   sdkScript.onerror = () => {
     container.innerText = "Failed to load Power BI SDK.";
     console.error("Power BI SDK load error.");
+    loading.remove();
   };
 
   document.body.appendChild(sdkScript);
