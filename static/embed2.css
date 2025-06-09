@@ -1,5 +1,4 @@
 /* embed2 variant: standard header offset with no extra reduction */
-
 :root {
   --header-height: 95px;
 }
@@ -24,6 +23,7 @@ header,
   position: fixed;
   top: var(--header-height);
   bottom: 0;
+  padding-bottom: env(safe-area-inset-bottom, 0);
   left: 0;
   width: 100vw !important;
   height: calc(100vh - var(--header-height)) !important;
@@ -31,7 +31,6 @@ header,
   max-width: 100vw !important;
   margin: 0;
   padding: 0;
-  padding-bottom: env(safe-area-inset-bottom, 0);
   border: none;
   overflow: auto;
   z-index: 1000;
@@ -66,8 +65,8 @@ header,
   #reportContainer {
     position: static;
     width: 100%;
-    height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
-    max-height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+    height: calc(100vh - var(--header-height)) !important;
+    max-height: calc(100vh - var(--header-height)) !important;
     overflow: auto;
   }
 
