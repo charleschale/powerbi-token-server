@@ -1,3 +1,4 @@
+/* embed2 variant: standard header offset with no extra reduction */
 /* embed2 variant: header height reduced by 3px for testing */
 
 :root {
@@ -26,8 +27,8 @@ header,
   bottom: env(safe-area-inset-bottom, 0);
   left: 0;
   width: 100vw !important;
-  height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
-  max-height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
+  height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+  max-height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
   max-width: 100vw !important;
   margin: 0;
   padding: 0;
@@ -40,7 +41,7 @@ header,
   #reportWrapper,
   #reportContainer,
   #reportContainer iframe {
-    height: calc(100vh - var(--header-height) - 3px);
+    height: calc(100vh - var(--header-height));
   }
 }
 
@@ -58,31 +59,31 @@ header,
   #reportWrapper {
     position: static;
     width: 100%;
-    height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px);
+    height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0));
     overflow: auto;
   }
 
   #reportContainer {
     position: static;
     width: 100%;
-    height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
-    max-height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
+    height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+    max-height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
     overflow: auto;
   }
 
   @supports (height: 100dvh) {
     #reportWrapper,
     #reportContainer {
-      height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
-      max-height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
+      height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+      max-height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
     }
   }
 
   @supports (height: 100svh) {
     #reportWrapper,
     #reportContainer {
-      height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
-      max-height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
+      height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+      max-height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
     }
   }
 
@@ -104,8 +105,9 @@ footer,
     #reportWrapper,
     #reportContainer,
     #reportContainer iframe {
-      height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
-      max-height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
+      height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+      max-height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+
     }
   }
 
@@ -113,8 +115,9 @@ footer,
     #reportWrapper,
     #reportContainer,
     #reportContainer iframe {
-      height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
-      max-height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0) - 3px) !important;
+      height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+      max-height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+
     }
   }
 }
