@@ -110,8 +110,11 @@ window.addEventListener('DOMContentLoaded', () => {
           }
         };
 
-        container.innerHTML = '';
-        window.powerbi.embed(container, config);
+        const report = window.powerbi.embed(container, config);
+        report.on('loaded', () => {
+          container.innerHTML = '';
+          console.log('✅ Power BI report loaded');
+        });
       })
       .catch(err => {
         container.innerText = "Failed to load Power BI report.";
