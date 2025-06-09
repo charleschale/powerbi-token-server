@@ -41,9 +41,17 @@
         };
 
         container.innerHTML = "";
+        const overlay = document.createElement("div");
+        overlay.id = "powerbi-loading";
+        overlay.textContent = "Loading Power BI...";
+        container.appendChild(overlay);
         const report = powerbi.embed(container, config);
-        report.on("loaded", () => console.log("✅ Power BI report loaded"));
+        report.on("loaded", () => {
+          overlay.remove();
+          console.log("✅ Power BI report loaded");
+        });
         report.on("error", err => {
+          overlay.remove();
           console.error("❌ Power BI render error:", err.detail);
           container.innerText = "Power BI failed to render.";
         });
