@@ -1,6 +1,4 @@
 /* embed2 variant: standard header offset with no extra reduction */
-/* embed2 variant: header height reduced by 3px for testing */
-
 :root {
   --header-height: 95px;
 }
@@ -60,7 +58,7 @@ header,
   #reportWrapper {
     position: static;
     width: 100%;
-    height: calc(100vh - var(--header-height));
+    height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0));
     overflow: auto;
   }
 
@@ -108,7 +106,6 @@ footer,
     #reportContainer iframe {
       height: calc(100dvh - var(--header-height)) !important;
       max-height: calc(100dvh - var(--header-height)) !important;
-
     }
   }
 
@@ -118,7 +115,6 @@ footer,
     #reportContainer iframe {
       height: calc(100svh - var(--header-height)) !important;
       max-height: calc(100svh - var(--header-height)) !important;
-
     }
   }
 }
