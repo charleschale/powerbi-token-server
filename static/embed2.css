@@ -66,31 +66,31 @@ header,
   #reportWrapper {
     position: static;
     width: 100%;
-    height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0));
+    height: calc(100vh - var(--header-height));
     overflow: auto;
   }
 
   #reportContainer {
     position: static;
     width: 100%;
-    height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
-    max-height: calc(100vh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+    height: calc(100vh - var(--header-height)) !important;
+    max-height: calc(100vh - var(--header-height)) !important;
     overflow: auto;
   }
 
   @supports (height: 100dvh) {
     #reportWrapper,
     #reportContainer {
-      height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
-      max-height: calc(100dvh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+      height: calc(100dvh - var(--header-height)) !important;
+      max-height: calc(100dvh - var(--header-height)) !important;
     }
   }
 
   @supports (height: 100svh) {
     #reportWrapper,
     #reportContainer {
-      height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
-      max-height: calc(100svh - var(--header-height) - env(safe-area-inset-bottom, 0)) !important;
+      height: calc(100svh - var(--header-height)) !important;
+      max-height: calc(100svh - var(--header-height)) !important;
     }
   }
 
