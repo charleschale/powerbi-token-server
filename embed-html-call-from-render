@@ -1,7 +1,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
   :root {
-    --header-height: 95px;
+    --header-height: 80px;
   }
 
   html, body {

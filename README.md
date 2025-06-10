@@ -63,9 +63,9 @@ Include `wp-powerbi-embed.js` on your WordPress page and provide the report info
 <script src="/path/to/wp-powerbi-embed.js"></script>
 ```
 
-The stylesheet defines a `--header-height` CSS custom property with a default
-value of `95px`. Override this variable in your own CSS if your theme's header
-height differs:
+The `embed2.css` stylesheet defines a `--header-height` CSS custom property with
+a default value of `80px`. You can override this variable in your own CSS if
+your theme's header height differs:
 
 ```css
 :root {
