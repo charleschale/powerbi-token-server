@@ -90,6 +90,20 @@ To use a different endpoint, provide a `data-server-url` attribute or define
 <script src="/path/to/wp-powerbi-embed.js"></script>
 ```
 
+The script defaults to displaying each report page at its actual size. To change
+this behavior, supply a `pageView` setting via the `data-page-view` attribute or
+`window.PowerBIEmbedConfig.pageView` before loading the script. Valid values
+correspond to the Power BI `models.PageView` enum, such as `actualSize`,
+`fitToWidth`, or `fitToPage`:
+
+```html
+<div id="reportContainer" data-page-view="fitToWidth"></div>
+<script>
+  window.PowerBIEmbedConfig = { pageView: 'fitToPage' };
+</script>
+<script src="/path/to/wp-powerbi-embed.js"></script>
+```
+
 The script fetches an embed token from your Flask server and renders the report using the Power BI client library.
 
 ### WordPress-ready snippet

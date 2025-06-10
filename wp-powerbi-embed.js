@@ -45,6 +45,11 @@ window.addEventListener('DOMContentLoaded', () => {
     datasetId: container.dataset.datasetId,
   };
   const { reportId, groupId, datasetId } = configData;
+  const pageViewSetting =
+    (window.PowerBIEmbedConfig && window.PowerBIEmbedConfig.pageView) ||
+    container.dataset.pageView ||
+    'actualSize';
+
   const serverUrl =
     (window.PowerBIEmbedConfig && window.PowerBIEmbedConfig.serverUrl) ||
     container.dataset.serverUrl ||
@@ -86,7 +91,7 @@ window.addEventListener('DOMContentLoaded', () => {
           tokenType: models.TokenType.Embed,
           settings: {
             layoutType: models.LayoutType.Custom,
-            pageView: models.PageView.fitToWidth,
+            pageView: models.PageView[pageViewSetting] || models.PageView.actualSize,
             navContentPaneEnabled: true,
             panes: {
               navigationPane: { visible: true },
