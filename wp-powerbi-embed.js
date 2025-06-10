@@ -86,6 +86,7 @@ window.addEventListener('DOMContentLoaded', () => {
           tokenType: models.TokenType.Embed,
           settings: {
             layoutType: models.LayoutType.Custom,
+            pageView: models.PageView.fitToWidth,
             navContentPaneEnabled: true,
             panes: {
               navigationPane: { visible: true },
