@@ -16,7 +16,6 @@ function updateHeaderOffset() {
   document.documentElement.style.setProperty('--header-height', offset + 'px');
 }
 
-window.addEventListener('DOMContentLoaded', updateHeaderOffset);
 window.addEventListener('load', updateHeaderOffset);
 window.addEventListener('resize', updateHeaderOffset);
 
