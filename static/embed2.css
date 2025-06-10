@@ -1,6 +1,6 @@
 /* embed2 variant: standard header offset with no extra reduction */
 :root {
-  --header-height: 95px;
+  --header-height: 80px;
 }
 
 html,
