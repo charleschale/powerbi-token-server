@@ -3,27 +3,43 @@ from flask_cors import CORS
 import msal
 import requests
 import os
+import re
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
-CORS(app, origins=["https://work.hale.global"])  # Update this to your WP domain
+CORS(app, origins=["https://work.hale.global"])  # Replace with your actual domain
 
+# Azure AD / Power BI credentials
 TENANT_ID = "3be3af3c-46a1-461d-93b1-44954da5e032"
 CLIENT_ID = "191260ff-ab3f-4d75-a211-780754200954"
-CLIENT_SECRET = os.getenv("CLIENT_SECRET")  # Make sure this is set in your env
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")  # Set this in your Render env vars
+
+def is_valid_guid(value):
+    return re.fullmatch(r'[a-fA-F0-9\-]{36}', value or '') is not None
 
 @app.route("/getEmbedToken", methods=["GET"])
 def get_embed_token():
+    # Get query params
     report_id = request.args.get("reportId")
     group_id = request.args.get("groupId")
     dataset_id = request.args.get("datasetId")
 
+    # Log them for debug
+    print("Embed token request received:")
+    print("  Report ID:", report_id)
+    print("  Group ID:", group_id)
+    print("  Dataset ID:", dataset_id)
+
+    # Validate inputs
     if not all([report_id, group_id, dataset_id]):
         return jsonify({"error": "Missing one or more query parameters."}), 400
 
+    if not (is_valid_guid(report_id) and is_valid_guid(group_id) and is_valid_guid(dataset_id)):
+        return jsonify({"error": "One or more parameters are not valid GUIDs."}), 400
+
+    # Get Azure AD token
     authority_url = f"https://login.microsoftonline.com/{TENANT_ID}"
     scope = ["https://analysis.windows.net/powerbi/api/.default"]
 
-    # Use MSAL to acquire a token from Azure AD
     app_msal = msal.ConfidentialClientApplication(
         CLIENT_ID,
         authority=authority_url,
@@ -34,13 +50,13 @@ def get_embed_token():
 
     if "access_token" not in token_response:
         return jsonify({
-            "error": "Failed to acquire Azure AD token",
+            "error": "Failed to acquire Azure AD token.",
             "details": token_response
         }), 500
 
     access_token = token_response["access_token"]
 
-    # Generate an embed token from Power BI API
+    # Get embed token from Power BI
     embed_url = f"https://api.powerbi.com/v1.0/myorg/groups/{group_id}/reports/{report_id}/GenerateToken"
     headers = {
         "Content-Type": "application/json",
@@ -57,6 +73,7 @@ def get_embed_token():
     response = requests.post(embed_url, headers=headers, json=payload)
 
     if response.status_code != 200:
+        print("Power BI API response error:", response.text)
         return jsonify({
             "error": "Failed to generate embed token",
             "details": response.text
