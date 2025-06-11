@@ -45,11 +45,20 @@
 
         container.innerHTML = "";
         const report = powerbi.embed(container, config);
+
+        // === Event hooks start here ===
         report.on("loaded", () => console.log("✅ Power BI report loaded"));
+
         report.on("error", err => {
           console.error("❌ Power BI render error:", err.detail);
           container.innerText = "Power BI failed to render.";
         });
+
+        // 👇 Add this line to catch visual-specific errors
+        report.on("visualRenderFailed", event => {
+          console.error("❌ Visual failed to render:", event.detail);
+        });
+        // === Event hooks end ===
       })
       .catch(err => {
         console.error("Fetch error:", err);
