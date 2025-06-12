@@ -48,11 +48,11 @@ The server will listen on port `5000` by default. The embed token endpoint will 
 
 ## Embedding in WordPress
 
-Include `wp-powerbi-embed.js` on your WordPress page and provide the report information using attributes (or by defining `window.PowerBIEmbedConfig` before the script loads). The optional `powerbi-embed.css` file styles the embedded report. If no `<link id="powerbi-embed-styles">` element is present, the script automatically creates one pointing to `powerbi-embed.css` located next to the script:
+Include `embedScript.js` on your WordPress page and provide the report information using attributes (or by defining `window.PowerBIEmbedConfig` before the script loads). The optional `embed.css` file styles the embedded report. If no `<link id="powerbi-embed-styles">` element is present, the script automatically creates one pointing to `embed.css` located next to the script:
 
 ```html
 <!-- Optional: include the stylesheet yourself (the script adds it automatically) -->
-<link id="powerbi-embed-styles" rel="stylesheet" href="/path/to/powerbi-embed.css">
+<link id="powerbi-embed-styles" rel="stylesheet" href="/path/to/embed.css">
 <div id="reportContainer"
      data-report-id="<report-id>"
      data-group-id="<workspace-id>"
@@ -60,7 +60,7 @@ Include `wp-powerbi-embed.js` on your WordPress page and provide the report info
      data-server-url="http://localhost:5000"><!-- optional override -->
   Loading Power BI...
 </div>
-<script src="/path/to/wp-powerbi-embed.js"></script>
+<script src="/path/to/embedScript.js"></script>
 ```
 
 The `embed2.css` stylesheet defines a `--header-height` CSS custom property with
@@ -87,19 +87,19 @@ To use a different endpoint, provide a `data-server-url` attribute or define
     serverUrl: "https://my-token-server.example.com"
   };
 </script>
-<script src="/path/to/wp-powerbi-embed.js"></script>
+<script src="/path/to/embedScript.js"></script>
 ```
 
 The script fetches an embed token from your Flask server and renders the report using the Power BI client library.
 
 ### WordPress-ready snippet
 
-An example file `embed-html-wordpress.html` contains the markup needed for a WordPress **Custom HTML** block. It loads the `powerbi-embed.css` stylesheet and the `wp-powerbi-embed.js` script and exposes the same `data-*` attributes for configuration.
+The example snippet above can be saved as an HTML file for a WordPress **Custom HTML** block. It loads the `embed.css` stylesheet and the `embedScript.js` script and exposes the same `data-*` attributes for configuration.
 
 ### Testing locally
 
 Copy the `embed-html` file anywhere on your system to try the embed code outside of WordPress. Set the required `data-report-id`, `data-group-id` and `data-dataset-id` attributes to your own IDs. To use a token server other than `https://powerbi-token-server.onrender.com`, provide its address with a `data-server-url` attribute or by defining `window.PowerBIEmbedConfig.serverUrl` before the script loads.
-A WordPress-ready snippet is available in `embed-html-wordpress.html`. Paste it into a Custom HTML block and edit the IDs as needed.
+Save the snippet above as an HTML file and paste it into a Custom HTML block, editing the IDs as needed.
 
 ## Running tests
 
