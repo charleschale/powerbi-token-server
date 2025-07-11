@@ -10,7 +10,11 @@
       datasetId: container.dataset.datasetId,
     };
 
-    const url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
+    const userEmail = window.loggedInEmail || container.dataset.username;
+    let url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
+    if (userEmail) {
+      url += `&username=${encodeURIComponent(userEmail)}`;
+    }
 
     fetch(url)
       .then(res => res.json())
