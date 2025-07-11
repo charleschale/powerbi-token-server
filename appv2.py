@@ -9,9 +9,9 @@ app = Flask(__name__, static_url_path='/static', static_folder='static')
 CORS(app, origins=["https://work.hale.global", "https://haleglobal.com", "https://www.haleglobal.com" ])  # Replace with your actual domain
 
 # Azure AD / Power BI credentials
-TENANT_ID = "3be3af3c-46a1-461d-93b1-44954da5e032"
-CLIENT_ID = "191260ff-ab3f-4d75-a211-780754200954"
-CLIENT_SECRET = os.getenv("CLIENT_SECRET")  # Set this in your Render env vars
+TENANT_ID = os.getenv("TENANT_ID", "3be3af3c-46a1-461d-93b1-44954da5e032")
+CLIENT_ID = os.getenv("CLIENT_ID", "191260ff-ab3f-4d75-a211-780754200954")
+CLIENT_SECRET = os.getenv("CLIENT_SECRET")  # Set this in your environment
 
 def is_valid_guid(value):
     return re.fullmatch(r'[a-fA-F0-9\-]{36}', value or '') is not None

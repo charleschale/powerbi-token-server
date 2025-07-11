@@ -30,15 +30,19 @@ Use `venv\Scripts\activate.bat` for the Command Prompt.
 
 ## Configuration
 
-Update `TENANT_ID`, `CLIENT_ID` and the allowed CORS domain at the top of `app.py` if needed. The application expects a `CLIENT_SECRET` environment variable. Set it in your shell before starting the app:
+Set the required credentials using environment variables before starting the app:
 
 ```bash
+export TENANT_ID="<your AAD tenant ID>"
+export CLIENT_ID="<your AAD application ID>"
 export CLIENT_SECRET="<your AAD app client secret>"
 ```
 
+The allowed CORS domains are defined in `app.py` and can be adjusted if needed.
+
 ## Running the server
 
-After installing the dependencies and setting `CLIENT_SECRET`, start the Flask app:
+After installing the dependencies and setting the environment variables, start the Flask app:
 
 ```bash
 python app.py
