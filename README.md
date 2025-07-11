@@ -30,10 +30,12 @@ Use `venv\Scripts\activate.bat` for the Command Prompt.
 
 ## Configuration
 
-Update `TENANT_ID`, `CLIENT_ID` and the allowed CORS domain at the top of `app.py` if needed. The application expects a `CLIENT_SECRET` environment variable. Set it in your shell before starting the app:
+Update `TENANT_ID`, `CLIENT_ID` and the allowed CORS domain at the top of `app.py` if needed. The application expects a `CLIENT_SECRET` environment variable. Set it in your shell before starting the app.  
+`appv2.py` also honors an optional `RLS_ROLE_NAME` variable for row-level security (defaults to `UserEmailRole`):
 
 ```bash
 export CLIENT_SECRET="<your AAD app client secret>"
+export RLS_ROLE_NAME="<dataset role name>"  # optional
 ```
 
 ## Running the server
@@ -44,7 +46,12 @@ After installing the dependencies and setting `CLIENT_SECRET`, start the Flask a
 python app.py
 ```
 
+
 The server will listen on port `5000` by default. The embed token endpoint will be available at `http://localhost:5000/getEmbedToken`.
+
+## Row-level security
+
+`appv2.py` can pass a username to Power BI so row-level security (RLS) rules are applied. Create a role named **UserEmailRole** in your dataset and filter tables using `USERNAME()` or `USERPRINCIPALNAME()`. Publish the dataset and provide a `username` query parameter when requesting a token. If you need a different role name, set the `RLS_ROLE_NAME` environment variable.
 
 ## Embedding in WordPress
 

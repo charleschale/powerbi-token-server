@@ -12,6 +12,7 @@ CORS(app, origins=["https://work.hale.global", "https://haleglobal.com", "https:
 TENANT_ID = "3be3af3c-46a1-461d-93b1-44954da5e032"
 CLIENT_ID = "191260ff-ab3f-4d75-a211-780754200954"
 CLIENT_SECRET = os.getenv("CLIENT_SECRET")  # Set this in your Render env vars
+RLS_ROLE_NAME = os.getenv("RLS_ROLE_NAME", "UserEmailRole")
 
 def is_valid_guid(value):
     return re.fullmatch(r'[a-fA-F0-9\-]{36}', value or '') is not None
@@ -76,7 +77,7 @@ def get_embed_token():
     if user_email:
         payload["identities"] = [{
             "username": user_email,
-            "roles": ["UserEmailRole"],
+            "roles": [RLS_ROLE_NAME],
             "datasets": [dataset_id]
         }]
 
