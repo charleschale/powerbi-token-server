@@ -89,4 +89,6 @@ def get_embed_token():
     })
 
 if __name__ == "__main__":
+    if not CLIENT_SECRET:
+        raise SystemExit("Error: CLIENT_SECRET environment variable not set")
     app.run(host="0.0.0.0", port=5000)

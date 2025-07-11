@@ -44,7 +44,13 @@ After installing the dependencies and setting `CLIENT_SECRET`, start the Flask a
 python app.py
 ```
 
-The server will listen on port `5000` by default. The embed token endpoint will be available at `http://localhost:5000/getEmbedToken`.
+For testing row-level security you can run the alternate script which accepts an optional `username` parameter:
+
+```bash
+python appv2.py
+```
+
+Both servers listen on port `5000` by default. The embed token endpoint is available at `http://localhost:5000/getEmbedToken`.
 
 ## Embedding in WordPress
 
@@ -95,6 +101,8 @@ The script fetches an embed token from your Flask server and renders the report 
 ### WordPress-ready snippet
 
 The example snippet above can be saved as an HTML file for a WordPress **Custom HTML** block. It loads the `embed.css` stylesheet and the `embedScript.js` script and exposes the same `data-*` attributes for configuration.
+
+If you need to send the logged-in user's email to the token server (for example to apply row-level security) use `embedScript_v2.js` instead. This variant reads `window.loggedInEmail` or `data-username` from the container element and appends a `username` parameter to the token request.
 
 ### Testing locally
 

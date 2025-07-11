@@ -1,4 +1,13 @@
 (function () {
+  const currentScript = document.currentScript;
+  if (!document.getElementById("powerbi-embed-styles")) {
+    const link = document.createElement("link");
+    link.id = "powerbi-embed-styles";
+    link.rel = "stylesheet";
+    link.href = new URL("embed.css", currentScript.src).href;
+    document.head.appendChild(link);
+  }
+
   const sdkScript = document.createElement("script");
   sdkScript.src = "https://cdn.jsdelivr.net/npm/powerbi-client@2.21.0/dist/powerbi.min.js";
 
@@ -8,9 +17,11 @@
       reportId: container.dataset.reportId,
       groupId: container.dataset.groupId,
       datasetId: container.dataset.datasetId,
+      serverUrl: container.dataset.serverUrl
     };
 
-    const url = `https://powerbi-token-server.onrender.com/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
+    const serverUrl = configData.serverUrl || "https://powerbi-token-server.onrender.com";
+    const url = `${serverUrl.replace(/\/$/, '')}/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
 
     fetch(url)
       .then(res => res.json())
