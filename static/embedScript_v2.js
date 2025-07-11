@@ -38,6 +38,9 @@
           tokenType: models.TokenType.Embed,
           settings: {
             layoutType: models.LayoutType.Custom,
+            customLayout: {
+              displayOption: models.DisplayOption.ActualSize
+            },
             panes: {
               navigationPane: { visible: true },
               pageNavigation: {
