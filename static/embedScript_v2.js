@@ -15,10 +15,9 @@
       "https://powerbi-token-server.onrender.com").replace(/\/$/, "");
 
     const userEmail = window.loggedInEmail || container.dataset.username;
-    let url = `${serverUrl}/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
-    if (userEmail) {
-      url += `&username=${encodeURIComponent(userEmail)}`;
-    }
+console.log("🧪 userEmail passed to server:", userEmail);
+let url = `${serverUrl}/getEmbedToken?reportId=${configData.reportId}&groupId=${configData.groupId}&datasetId=${configData.datasetId}`;
+
 
     fetch(url)
       .then(res => res.json())
