@@ -84,14 +84,16 @@ def get_embed_token():
     response = requests.post(embed_url, headers=headers, json=payload)
 
     if response.status_code != 200:
-        print("\u274c Power BI API token error:")
-        print("Status code:", response.status_code)
-        print("Response text:", response.text)
-        print("Sent payload:", payload)
+        print("❌ Embed token generation failed")
+        print("➡️  Payload sent:", payload)
+        print("📥  API Response:", response.text)
+        print("🔐  Email passed:", user_email)
+        print("📊  Dataset ID:", dataset_id)
+        print("🧾  Report ID:", report_id)
 
         return jsonify({
             "error": "Failed to generate embed token",
-            "status_code": response.status_code,
+            "status": response.status_code,
             "response": response.text,
             "payload_used": payload
         }), 500
