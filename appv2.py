@@ -6,7 +6,7 @@ import os
 import re
 
 app = Flask(__name__, static_url_path='/static', static_folder='static')
-CORS(app, origins=["https://work.hale.global", "https://haleglobal.com", "https://www.haleglobal.com"])
+CORS(app, origins=["https://work.hale.global",  "https://sd.com", "https://www.sd.com", "https://haleglobal.com", "https://www.haleglobal.com"])
 
 # Azure AD / Power BI credentials
 TENANT_ID = os.getenv("TENANT_ID", "3be3af3c-46a1-461d-93b1-44954da5e032")
